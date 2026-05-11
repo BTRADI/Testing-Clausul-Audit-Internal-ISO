@@ -4,13 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ISO Audit Pro - Integrated Checklist</title>
-  
-  <!-- External Libraries -->
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-  
-  <!-- Custom CSS -->
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -75,12 +71,12 @@
   <!-- Main Content -->
   <div class="flex-1 flex flex-col">
     <!-- HEADER -->
-    <div class="sticky top-0 glass border-b border-[var(--border-color)] z-50 px-6 py-4 flex items-center justify-between">
+    <div class="sticky top-0 glass border-b border-[var(--border-color)] z-50 px-4 py-4 flex items-center justify-between">
       <button onclick="toggleMobileMenu()" class="lg:hidden p-4 rounded-2xl hover:bg-gray-100 dark:hover:bg-gray-700">
         <i class="fas fa-bars text-2xl"></i>
       </button>
 
-      <div class="flex-1 max-w-xl mx-6 relative">
+      <div id="search-container" class="flex-1 max-w-2xl mx-4 lg:mx-6 relative">
         <div class="absolute left-5 top-1/2 -translate-y-1/2 text-[var(--text-secondary)]">
           <i class="fas fa-search"></i>
         </div>
@@ -95,7 +91,7 @@
         <div id="search-suggestions" class="hidden"></div>
       </div>
 
-      <div class="flex items-center gap-3">
+      <div class="flex items-center gap-3 header-buttons">
         <button onclick="showExportModal()" class="lg:hidden p-4 rounded-2xl hover:bg-gray-100 dark:hover:bg-gray-700">
           <i class="fas fa-file-pdf text-2xl"></i>
         </button>
@@ -108,15 +104,31 @@
       </div>
     </div>
 
-    <div class="flex-1 overflow-auto p-6 lg:p-10">
+    <div id="main-content-area" class="flex-1 overflow-auto p-6 lg:p-10">
       <div id="header" class="mb-12 text-center lg:text-left"></div>
       <div id="questions" class="space-y-10"></div>
     </div>
   </div>
+
+  <!-- MOBILE BOTTOM BAR -->
+  <div id="mobile-bottom-bar" class="hidden fixed bottom-0 left-0 right-0 bg-white dark:bg-gray-800 border-t border-[var(--border-color)] z-[9999] px-6 py-3 flex items-center justify-around shadow-2xl">
+    <button onclick="showExportModal()" class="bottom-bar-item flex flex-col items-center text-slate-900 dark:text-slate-100 hover:text-blue-600 transition-all">
+      <i class="fas fa-file-pdf text-2xl"></i>
+      <span class="text-xs mt-1 font-medium">PDF</span>
+    </button>
+    <button onclick="toggleDarkMode()" class="bottom-bar-item flex flex-col items-center text-slate-900 dark:text-slate-100 hover:text-blue-600 transition-all">
+      <i id="bottom-theme-icon" class="fas fa-moon text-2xl"></i>
+      <span class="text-xs mt-1 font-medium">Tema</span>
+    </button>
+    <button onclick="showLogoutModal()" class="bottom-bar-item flex flex-col items-center text-slate-900 dark:text-slate-100 hover:text-red-600 transition-all">
+      <i class="fas fa-sign-out-alt text-2xl"></i>
+      <span class="text-xs mt-1 font-medium">Keluar</span>
+    </button>
+  </div>
 </div>
 
 <!-- Mobile Sidebar -->
-<div id="mobile-sidebar" onclick="if(event.target.id === 'mobile-sidebar') toggleMobileMenu()" class="hidden fixed inset-0 bg-black/70 z-[999] lg:hidden">
+<div id="mobile-sidebar" onclick="if(event.target.id === 'mobile-sidebar') toggleMobileMenu()" class="hidden fixed inset-0 bg-black/70 z-[10000] lg:hidden">
   <div onclick="event.stopImmediatePropagation()" class="sidebar-panel w-80 h-full glass ml-0 overflow-hidden flex flex-col shadow-2xl">
     <div class="p-8 border-b border-[var(--border-color)]">
       <div class="flex justify-between items-center">
@@ -140,6 +152,9 @@
     <div id="mobile-sidebar-content" class="flex-1 overflow-auto p-6 space-y-4"></div>
   </div>
 </div>
+
+<!-- BANNER NOTIFICATION -->
+<div id="banner-notification" class="hidden fixed top-4 left-1/2 -translate-x-1/2 z-[11000] max-w-md w-[calc(100%-2rem)] mx-4 shadow-2xl rounded-3xl overflow-hidden transition-all duration-300"></div>
 
 <!-- LOGOUT MODAL -->
 <div id="logout-modal" onclick="if(event.target.id === 'logout-modal') hideLogoutModal()" class="hidden fixed inset-0 bg-black/70 z-[2000] flex items-center justify-center">
@@ -175,7 +190,6 @@
       <h3 class="text-2xl font-bold">Informasi Laporan Audit</h3>
       <button onclick="hideExportModal()" class="text-3xl text-gray-400 hover:text-gray-600">✕</button>
     </div>
-    
     <div class="space-y-6">
       <div>
         <label class="block text-sm font-medium mb-2">Tanggal Audit</label>
@@ -194,7 +208,6 @@
         <input id="export-division" type="text" class="w-full p-4 rounded-2xl border border-[var(--border-color)] focus:border-blue-500 outline-none" placeholder="Masukkan divisi/unit" value="Produksi">
       </div>
     </div>
-
     <div class="flex gap-4 mt-10">
       <button onclick="hideExportModal()" class="flex-1 py-4 border-2 border-gray-300 dark:border-gray-600 rounded-2xl font-semibold">Batal</button>
       <button onclick="startPDFExport()" class="flex-1 py-4 bg-emerald-500 hover:bg-emerald-600 text-white rounded-2xl font-semibold">Ekspor PDF</button>
