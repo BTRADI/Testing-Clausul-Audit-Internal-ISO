@@ -1,4 +1,3 @@
-// ================== DATA ==================
 const standards = {
   '9001': { name: 'ISO 9001:2015', short: '9001' },
   '14001': { name: 'ISO 14001:2015', short: '14001' }
@@ -17,7 +16,6 @@ let currentSearchTerm = '';
 let loginProgressInterval = null;
 let exportMetadata = {};
 
-// ================== FULL STANDARD DATA ==================
 function loadStandardData(standard) {
   if (standard === '14001') {
     return [
@@ -104,7 +102,6 @@ function loadStandardData(standard) {
   ];
 }
 
-// ================== ROBUST RESET LOGIN ==================
 function resetLoginButton() {
   if (loginProgressInterval) {
     clearInterval(loginProgressInterval);
@@ -118,7 +115,6 @@ function resetLoginButton() {
   document.getElementById('password').value = '';
 }
 
-// ================== LOGIN ==================
 document.getElementById('login-form').addEventListener('submit', function(e) {
   e.preventDefault();
   const username = document.getElementById('username').value.trim();
@@ -183,7 +179,6 @@ document.getElementById('login-form').addEventListener('submit', function(e) {
   }, 45);
 });
 
-// ================== SIDEBAR ==================
 function renderSidebar() {
   let html = '';
   currentStandardData.forEach(clause => {
@@ -228,7 +223,6 @@ function updateSummary() {
   document.getElementById('mobile-summary-pending').textContent = pending;
 }
 
-// ================== SEARCH ==================
 function handleSearchInput() {
   const input = document.getElementById('search-input');
   currentSearchTerm = input.value.toLowerCase().trim();
@@ -286,7 +280,6 @@ function selectSuggestion(clauseNum) {
   loadClause(clauseNum);
 }
 
-// ================== LOAD CLAUSE ==================
 function loadClause(clauseNum) {
   currentClauseNum = clauseNum;
   const clause = currentStandardData.find(c => c.clause === clauseNum);
@@ -299,7 +292,9 @@ function loadClause(clauseNum) {
 
   const filteredItems = clause.items.filter(item => {
     if (!currentSearchTerm) return true;
-    return item.req.toLowerCase().includes(currentSearchTerm) || item.eng.toLowerCase().includes(currentSearchTerm) || item.id.toLowerCase().includes(currentSearchTerm);
+    return item.req.toLowerCase().includes(currentSearchTerm) || 
+           item.eng.toLowerCase().includes(currentSearchTerm) || 
+           item.id.toLowerCase().includes(currentSearchTerm);
   });
 
   const html = filteredItems.map((item, idx) => {
@@ -328,19 +323,20 @@ function loadClause(clauseNum) {
             <h3 class="text-2xl font-semibold leading-tight mb-4">${item.req}</h3>
             <p class="text-sm text-[var(--text-secondary)] italic mb-8">${item.eng}</p>
             
-            <div class="flex flex-wrap gap-4 mb-8">
+            <div class="flex flex-wrap gap-4 mb-8 items-center">
               <span class="px-6 py-3 bg-blue-50 dark:bg-blue-900/50 text-blue-700 dark:text-blue-300 rounded-2xl text-sm font-medium">${item.id}</span>
+              
               ${ans.status ? 
-                `<span class="px-6 py-3 rounded-2xl text-sm font-bold ${ans.status==='Compliant' ? 'bg-emerald-500 text-white' : 'bg-red-500 text-white'}">
-                  ${ans.status === 'Compliant' ? '✅ Compliant' : '❌ Non-Compliant'}
+                `<span onclick="resetStatus('${item.id}')" class="px-6 py-3 rounded-2xl text-sm font-bold cursor-pointer ${ans.status==='Compliant' ? 'bg-emerald-500 text-white' : 'bg-red-500 text-white'}">
+                  ${ans.status === 'Compliant' ? '✅ Compliant' : '❌ Non-Compliant'} <span class="ml-2 text-xs opacity-75">(klik untuk batal)</span>
                 </span>` : 
                 `<span class="px-6 py-3 border-2 border-dashed border-gray-400 rounded-2xl text-sm">⏳ Belum Dinilai</span>`
               }
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
-              <button onclick="setStatus('${item.id}', 'Compliant')" class="status-btn py-6 rounded-2xl border-2 border-emerald-500 font-bold ${ans.status==='Compliant' ? 'bg-emerald-500 text-white' : 'text-emerald-700 dark:text-emerald-400 hover:bg-emerald-50 dark:hover:bg-emerald-900/30'}">✅ Compliant</button>
-              <button onclick="setStatus('${item.id}', 'Non-Compliant')" class="status-btn py-6 rounded-2xl border-2 border-red-500 font-bold ${ans.status==='Non-Compliant' ? 'bg-red-500 text-white' : 'text-red-700 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/30'}">❌ Non-Compliant</button>
+              <button onclick="setStatus('${item.id}', 'Compliant')" class="status-btn py-6 rounded-2xl border-2 border-emerald-500 font-bold transition-all ${ans.status==='Compliant' ? 'bg-emerald-500 text-white scale-105' : 'text-emerald-700 dark:text-emerald-400 hover:bg-emerald-50 dark:hover:bg-emerald-900/30'}">✅ Compliant</button>
+              <button onclick="setStatus('${item.id}', 'Non-Compliant')" class="status-btn py-6 rounded-2xl border-2 border-red-500 font-bold transition-all ${ans.status==='Non-Compliant' ? 'bg-red-500 text-white scale-105' : 'text-red-700 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/30'}">❌ Non-Compliant</button>
             </div>
 
             <textarea id="evidence-${item.id}" class="w-full p-4 rounded-2xl border border-[var(--border-color)] focus:border-blue-500 outline-none text-sm resize-y min-h-[100px] mb-6"
@@ -361,8 +357,28 @@ function loadClause(clauseNum) {
   }).join('');
 
   document.getElementById('questions').innerHTML = html || `<div class="text-center py-20 text-[var(--text-secondary)]">Tidak ada hasil pencarian yang cocok.</div>`;
+  
   renderSidebar();
   updateProgress();
+
+  // AUTO SCROLL KE PALING ATAS SETIAP GANTI KLAUSUL
+  const mainContent = document.getElementById('main-content-area');
+  if (mainContent) {
+    mainContent.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  }
+}
+
+function resetStatus(id) {
+  if (answers[id]) {
+    delete answers[id].status;
+    delete answers[id].timestamp;
+    localStorage.setItem(`iso_audit_${currentUser}`, JSON.stringify(answers));
+    loadClause(currentClauseNum);
+    showBannerNotification('Status telah dibatalkan', 'pending');
+  }
 }
 
 function handleFileUpload(id, input) {
@@ -395,12 +411,19 @@ function removeEvidenceFile(id) {
 }
 
 function setStatus(id, status) {
+  const current = answers[id] || {};
+  if (current.status === status) {
+    resetStatus(id);
+    return;
+  }
   answers[id] = answers[id] || {};
   answers[id].status = status;
   answers[id].timestamp = new Date().toISOString();
   localStorage.setItem(`iso_audit_${currentUser}`, JSON.stringify(answers));
   loadClause(currentClauseNum);
-  showNotification(`✅ Status ${status} berhasil disimpan`, "success");
+  
+  const message = status === 'Compliant' ? 'Status Compliant berhasil disimpan' : 'Status Non-Compliant berhasil disimpan';
+  showBannerNotification(message, status);
 }
 
 function saveEvidence(id, text) {
@@ -409,7 +432,6 @@ function saveEvidence(id, text) {
   localStorage.setItem(`iso_audit_${currentUser}`, JSON.stringify(answers));
 }
 
-// ================== PROGRESS ==================
 function updateProgress() {
   const total = currentStandardData.reduce((sum, c) => sum + c.items.length, 0);
   const answered = Object.keys(answers).filter(k => answers[k]?.status).length;
@@ -420,7 +442,42 @@ function updateProgress() {
   document.getElementById('mobile-progress-text').textContent = percent + '%';
 }
 
-// ================== EXPORT ==================
+function showBannerNotification(message, type) {
+  const banner = document.getElementById('banner-notification');
+  let bgColor = '#10b981';
+  let icon = '✅';
+  if (type === 'Non-Compliant') {
+    bgColor = '#ef4444';
+    icon = '❌';
+  } else if (type === 'pending') {
+    bgColor = '#64748b';
+    icon = '⏳';
+  }
+  
+  banner.innerHTML = `
+    <div class="banner-content" style="background-color: ${bgColor};">
+      <span class="text-2xl">${icon}</span>
+      <div class="flex-1 text-sm">${message}</div>
+    </div>
+  `;
+  banner.classList.remove('hidden');
+  banner.style.opacity = '0';
+  banner.style.transform = 'translateY(-20px)';
+
+  setTimeout(() => {
+    banner.style.transition = 'all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1)';
+    banner.style.opacity = '1';
+    banner.style.transform = 'translateY(0)';
+  }, 10);
+
+  setTimeout(() => {
+    banner.style.transition = 'all 0.3s ease';
+    banner.style.opacity = '0';
+    banner.style.transform = 'translateY(-20px)';
+    setTimeout(() => banner.classList.add('hidden'), 300);
+  }, 2800);
+}
+
 function showExportModal() {
   const modal = document.getElementById('export-modal');
   modal.classList.remove('hidden');
@@ -435,10 +492,8 @@ function hideExportModal() {
 function startPDFExport() {
   const auditDateStr = document.getElementById('export-audit-date').value;
   const auditDate = auditDateStr ? new Date(auditDateStr) : new Date();
-  
   const dueDate = new Date(auditDate);
   dueDate.setDate(dueDate.getDate() + 45);
-
   exportMetadata = {
     auditor: document.getElementById('export-auditor').value || 'Auditor',
     auditee: document.getElementById('export-auditee').value || '-',
@@ -454,11 +509,9 @@ function generatePDF() {
   const { jsPDF } = window.jspdf;
   const doc = new jsPDF('p', 'mm', 'a4');
   let y = 20;
-
   doc.setFontSize(22);
   doc.text("LAPORAN AUDIT ISO", 105, y, { align: "center" });
   y += 10;
-
   doc.setFontSize(12);
   doc.text(`Auditor     : ${exportMetadata.auditor}`, 20, y);
   doc.text(`Auditee     : ${exportMetadata.auditee}`, 20, y + 7);
@@ -466,7 +519,6 @@ function generatePDF() {
   doc.text(`Tanggal Audit : ${exportMetadata.auditDate}`, 20, y + 21);
   doc.text(`Due Date      : ${exportMetadata.dueDate} (45 hari kerja)`, 20, y + 28);
   y += 40;
-
   let compliant = 0, noncompliant = 0;
   currentStandardData.forEach(clause => {
     clause.items.forEach(item => {
@@ -478,31 +530,25 @@ function generatePDF() {
   doc.setFontSize(14);
   doc.text(`Ringkasan: ${compliant} Compliant | ${noncompliant} Non-Compliant`, 20, y);
   y += 15;
-
   const standardCode = currentUser.includes('9001') ? '9001' : '14001';
   const standard = standards[standardCode];
-
   currentStandardData.forEach(clause => {
     if (y > 260) { doc.addPage(); y = 20; }
     doc.setFontSize(14);
     doc.text(`Clause ${clause.clause} - ${clause.title}`, 20, y);
     y += 12;
-
     clause.items.forEach(item => {
       if (y > 270) { doc.addPage(); y = 20; }
       const ans = answers[item.id] || {};
       const status = ans.status || "Belum Dinilai";
       const textEvidence = ans.evidence || "-";
-
       doc.setFontSize(11);
       doc.text(`• ${item.id}`, 25, y);
       doc.text(status, 170, y, { align: "right" });
       y += 8;
-
       doc.setFontSize(10);
       doc.text(`Catatan: ${textEvidence.substring(0, 90)}${textEvidence.length > 90 ? '...' : ''}`, 30, y);
       y += 8;
-
       if (ans.evidenceFile && ans.evidenceFile.data && ans.evidenceFile.type.startsWith('image/')) {
         try {
           doc.addImage(ans.evidenceFile.data, 'JPEG', 30, y, 80, 50);
@@ -516,23 +562,23 @@ function generatePDF() {
     });
     y += 12;
   });
-
   doc.save(`ISO_Audit_Report_${standard.short}_${new Date().toISOString().slice(0,10)}.pdf`);
   showNotification("📄 Laporan PDF berhasil diunduh!", "success");
   exportMetadata = {};
 }
 
-// ================== DARK MODE ==================
 function toggleDarkMode() {
   const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
   if (isDark) {
     document.documentElement.removeAttribute('data-theme');
     localStorage.setItem('theme', 'light');
     document.getElementById('theme-icon').className = 'fas fa-moon text-2xl';
+    if (document.getElementById('bottom-theme-icon')) document.getElementById('bottom-theme-icon').className = 'fas fa-moon text-2xl';
   } else {
     document.documentElement.setAttribute('data-theme', 'dark');
     localStorage.setItem('theme', 'dark');
     document.getElementById('theme-icon').className = 'fas fa-sun text-2xl';
+    if (document.getElementById('bottom-theme-icon')) document.getElementById('bottom-theme-icon').className = 'fas fa-sun text-2xl';
   }
 }
 
@@ -540,10 +586,10 @@ function loadDarkModePreference() {
   if (localStorage.getItem('theme') === 'dark') {
     document.documentElement.setAttribute('data-theme', 'dark');
     document.getElementById('theme-icon').className = 'fas fa-sun text-2xl';
+    if (document.getElementById('bottom-theme-icon')) document.getElementById('bottom-theme-icon').className = 'fas fa-sun text-2xl';
   }
 }
 
-// ================== MOBILE MENU ==================
 function toggleMobileMenu() {
   const sidebar = document.getElementById('mobile-sidebar');
   sidebar.classList.toggle('hidden');
@@ -554,7 +600,6 @@ function toggleMobileMenu() {
   }
 }
 
-// ================== LOGOUT ==================
 function showLogoutModal() {
   document.getElementById('logout-modal').classList.remove('hidden');
 }
@@ -567,27 +612,23 @@ function confirmLogout() {
   const btn = document.getElementById('logout-confirm-btn');
   btn.innerHTML = `<i class="fas fa-spinner fa-spin"></i> Memproses...`;
   btn.disabled = true;
-
   setTimeout(() => {
-    if (currentUser) {
-      localStorage.removeItem(`iso_audit_${currentUser}`);
-    }
+    if (currentUser) localStorage.removeItem(`iso_audit_${currentUser}`);
+    answers = {};
     currentUser = null;
+    currentClauseNum = '4';
+    currentSearchTerm = '';
     hideLogoutModal();
     document.getElementById('main-app').classList.add('hidden');
     document.getElementById('login-screen').classList.remove('hidden');
-    
     resetLoginButton();
-    currentSearchTerm = '';
     document.getElementById('search-input').value = '';
     document.getElementById('search-clear-btn').classList.add('hidden');
     document.getElementById('search-suggestions').style.display = 'none';
-    
     showNotification("✅ Logout berhasil!", "success");
-  }, 1100);
+  }, 600);
 }
 
-// ================== FILE ERROR MODAL ==================
 function showFileErrorModal() {
   document.getElementById('file-error-modal').classList.remove('hidden');
 }
@@ -596,7 +637,6 @@ function hideFileErrorModal() {
   document.getElementById('file-error-modal').classList.add('hidden');
 }
 
-// ================== NOTIFICATION ==================
 function showNotification(message, type = "success") {
   const notif = document.createElement('div');
   notif.className = `fixed bottom-6 right-6 px-8 py-4 rounded-2xl shadow-2xl text-white font-medium z-[3000] ${type === "success" ? "bg-emerald-500" : "bg-blue-500"}`;
