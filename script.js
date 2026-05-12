@@ -57,47 +57,78 @@ function loadStandardData(standard) {
       ]}
     ];
   }
+
+  // ==================== ISO 9001:2015 FULL DATA (sesuai dokumen Word) ====================
   return [
     { clause: "4", title: "Konteks Organisasi", items: [
-      { id: "9001-4.1", req: "Organisasi harus menentukan isu eksternal dan internal yang relevan dengan tujuannya dan memengaruhi kemampuannya mencapai hasil yang diinginkan.", eng: "The organization shall determine external and internal issues that are relevant to its purpose and its strategic direction and that affect its ability to achieve the intended result(s) of its quality management system." },
-      { id: "9001-4.2", req: "Organisasi harus menentukan kebutuhan dan harapan pihak berkepentingan yang relevan dengan sistem manajemen mutu.", eng: "The organization shall determine the interested parties that are relevant to the quality management system and the requirements of these interested parties." },
-      { id: "9001-4.3", req: "Organisasi harus menentukan ruang lingkup sistem manajemen mutu.", eng: "The organization shall determine the boundaries and applicability of the quality management system." },
-      { id: "9001-4.4", req: "Organisasi harus menetapkan, menerapkan, memelihara, dan terus meningkatkan sistem manajemen mutu.", eng: "The organization shall establish, implement, maintain and continually improve a quality management system, including the processes needed and their interactions." }
+      { id: "9001-4.1", req: "Memahami Organisasi dan Konteksnya", eng: "Understanding the Organization and its Context" },
+      { id: "9001-4.2", req: "Memahami Kebutuhan dan Harapan Pihak Berkepentingan", eng: "Understanding the Needs and Expectations of Interested Parties" },
+      { id: "9001-4.3", req: "Menentukan Ruang Lingkup Sistem Manajemen Mutu", eng: "Determining the Scope of the Quality Management System" },
+      { id: "9001-4.4", req: "Sistem Manajemen Mutu dan Proses-Prosesnya", eng: "Quality Management System and its Processes" }
     ]},
     { clause: "5", title: "Kepemimpinan", items: [
-      { id: "9001-5.1", req: "Manajemen puncak harus menunjukkan kepemimpinan dan komitmen terhadap sistem manajemen mutu.", eng: "Top management shall demonstrate leadership and commitment with respect to the quality management system." },
-      { id: "9001-5.2", req: "Manajemen puncak harus menetapkan, menerapkan, dan memelihara kebijakan mutu.", eng: "Top management shall establish, implement and maintain a quality policy." },
-      { id: "9001-5.3", req: "Manajemen puncak harus memastikan tanggung jawab dan wewenang telah ditetapkan.", eng: "Top management shall ensure that the responsibilities and authorities for relevant roles are assigned, communicated and understood." }
+      { id: "9001-5.1", req: "Kepemimpinan dan Komitmen", eng: "Leadership and Commitment" },
+      { id: "9001-5.1.1", req: "Umum", eng: "General" },
+      { id: "9001-5.1.2", req: "Fokus pada Pelanggan", eng: "Customer Focus" },
+      { id: "9001-5.2", req: "Kebijakan", eng: "Policy" },
+      { id: "9001-5.2.1", req: "Menetapkan Kebijakan Mutu", eng: "Establishing the Quality Policy" },
+      { id: "9001-5.2.2", req: "Mengkomunikasikan Kebijakan Mutu", eng: "Communicating the Quality Policy" },
+      { id: "9001-5.3", req: "Peran, Tanggung Jawab, dan Wewenang Organisasi", eng: "Organizational Roles, Responsibilities and Authorities" }
     ]},
     { clause: "6", title: "Perencanaan", items: [
-      { id: "9001-6.1", req: "Organisasi harus merencanakan tindakan untuk mengatasi risiko dan peluang.", eng: "The organization shall plan actions to address risks and opportunities." },
-      { id: "9001-6.2", req: "Organisasi harus menetapkan sasaran mutu dan rencana untuk mencapainya.", eng: "The organization shall establish quality objectives at relevant functions, levels and processes." }
+      { id: "9001-6.1", req: "Tindakan untuk Mengatasi Risiko dan Peluang", eng: "Actions to Address Risks and Opportunities" },
+      { id: "9001-6.2", req: "Sasaran Mutu dan Perencanaan untuk Mencapainya", eng: "Quality Objectives and Planning to Achieve Them" },
+      { id: "9001-6.3", req: "Perencanaan Perubahan", eng: "Planning of Changes" }
     ]},
     { clause: "7", title: "Dukungan", items: [
-      { id: "9001-7.1", req: "Organisasi harus menentukan dan menyediakan sumber daya yang diperlukan.", eng: "The organization shall determine and provide the resources needed for the establishment, implementation, maintenance and continual improvement of the quality management system." },
-      { id: "9001-7.2", req: "Organisasi harus memastikan bahwa personel yang melakukan pekerjaan kompeten.", eng: "The organization shall ensure that the persons doing work under its control are competent on the basis of appropriate education, training or experience." },
-      { id: "9001-7.3", req: "Organisasi harus memastikan kesadaran personel terhadap tugas dan kebijakan mutu.", eng: "The organization shall ensure that persons doing work under its control are aware of the quality policy, relevant quality objectives, their contribution to the effectiveness of the quality management system and the implications of not conforming with the quality management system requirements." },
-      { id: "9001-7.4", req: "Organisasi harus menentukan kebutuhan komunikasi internal dan eksternal.", eng: "The organization shall determine the internal and external communications relevant to the quality management system." },
-      { id: "9001-7.5", req: "Organisasi harus mengendalikan informasi terdokumentasi yang diperlukan.", eng: "The organization shall control the documented information required by the quality management system and by this International Standard." }
+      { id: "9001-7.1", req: "Sumber Daya", eng: "Resources" },
+      { id: "9001-7.1.1", req: "Umum", eng: "General" },
+      { id: "9001-7.1.2", req: "Orang / Personel", eng: "People" },
+      { id: "9001-7.1.3", req: "Infrastruktur", eng: "Infrastructure" },
+      { id: "9001-7.1.4", req: "Lingkungan untuk Operasional Proses", eng: "Environment for the Operation of Processes" },
+      { id: "9001-7.1.5", req: "Sumber Daya Pemantauan dan Pengukuran", eng: "Monitoring and Measuring Resources" },
+      { id: "9001-7.1.5.1", req: "Umum", eng: "General" },
+      { id: "9001-7.1.5.2", req: "Ketertelusuran Pengukuran", eng: "Measurement Traceability" },
+      { id: "9001-7.1.6", req: "Pengetahuan Organisasi", eng: "Organizational Knowledge" },
+      { id: "9001-7.2", req: "Kompetensi", eng: "Competence" },
+      { id: "9001-7.3", req: "Kesadaran", eng: "Awareness" },
+      { id: "9001-7.4", req: "Komunikasi", eng: "Communication" },
+      { id: "9001-7.5", req: "Informasi Terdokumentasi", eng: "Documented Information" },
+      { id: "9001-7.5.1", req: "Umum", eng: "General" },
+      { id: "9001-7.5.2", req: "Membuat dan Memperbarui", eng: "Creating and Updating" },
+      { id: "9001-7.5.3", req: "Pengendalian Informasi Terdokumentasi", eng: "Control of Documented Information" }
     ]},
-    { clause: "8", title: "Operasi", items: [
-      { id: "9001-8.1", req: "Organisasi harus merencanakan, melaksanakan dan mengendalikan proses yang diperlukan untuk memenuhi persyaratan.", eng: "The organization shall plan, implement and control the processes needed to meet the requirements for the provision of products and services." },
-      { id: "9001-8.2", req: "Organisasi harus berkomunikasi dengan pelanggan mengenai produk dan jasa.", eng: "The organization shall communicate with customers regarding requirements for products and services." },
-      { id: "9001-8.3", req: "Organisasi harus merancang dan mengembangkan produk dan jasa.", eng: "The organization shall establish, implement and maintain a design and development process." },
-      { id: "9001-8.4", req: "Organisasi harus mengendalikan proses, produk dan jasa yang disediakan oleh pihak eksternal.", eng: "The organization shall ensure that externally provided processes, products and services conform to requirements." },
-      { id: "9001-8.5", req: "Organisasi harus mengendalikan produksi dan penyediaan jasa.", eng: "The organization shall implement production and service provision under controlled conditions." },
-      { id: "9001-8.6", req: "Organisasi harus melaksanakan release produk dan jasa.", eng: "The organization shall implement planned arrangements to verify that the product and service requirements have been met." },
-      { id: "9001-8.7", req: "Organisasi harus mengendalikan output yang tidak sesuai.", eng: "The organization shall ensure that nonconforming outputs are identified and controlled." }
+    { clause: "8", title: "Operasional", items: [
+      { id: "9001-8.1", req: "Perencanaan dan Pengendalian Operasional", eng: "Operational Planning and Control" },
+      { id: "9001-8.2", req: "Persyaratan Produk dan Jasa", eng: "Requirements for Products and Services" },
+      { id: "9001-8.2.1", req: "Komunikasi Pelanggan", eng: "Customer Communication" },
+      { id: "9001-8.2.2", req: "Menentukan Persyaratan Produk dan Jasa", eng: "Determining Requirements for Products and Services" },
+      { id: "9001-8.2.3", req: "Tinjauan Persyaratan Produk dan Jasa", eng: "Review of Requirements for Products and Services" },
+      { id: "9001-8.2.4", req: "Perubahan Persyaratan Produk dan Jasa", eng: "Changes to Requirements for Products and Services" },
+      { id: "9001-8.3", req: "Desain dan Pengembangan Produk dan Jasa", eng: "Design and Development of Products and Services" },
+      { id: "9001-8.4", req: "Pengendalian Proses, Produk, dan Jasa yang Disediakan Eksternal", eng: "Control of Externally Provided Processes, Products and Services" },
+      { id: "9001-8.5", req: "Produksi dan Penyediaan Jasa", eng: "Production and Service Provision" },
+      { id: "9001-8.5.1", req: "Pengendalian Produksi dan Penyediaan Jasa", eng: "Control of Production and Service Provision" },
+      { id: "9001-8.5.2", req: "Identifikasi dan Ketertelusuran", eng: "Identification and Traceability" },
+      { id: "9001-8.5.3", req: "Properti Milik Pelanggan atau Penyedia Eksternal", eng: "Property Belonging to Customers or External Providers" },
+      { id: "9001-8.5.4", req: "Pemeliharaan", eng: "Preservation" },
+      { id: "9001-8.5.5", req: "Aktivitas Pasca Penyerahan", eng: "Post-delivery Activities" },
+      { id: "9001-8.5.6", req: "Pengendalian Perubahan", eng: "Control of Changes" },
+      { id: "9001-8.6", req: "Pelepasan Produk dan Jasa", eng: "Release of Products and Services" },
+      { id: "9001-8.7", req: "Pengendalian Output Tidak Sesuai", eng: "Control of Nonconforming Outputs" }
     ]},
     { clause: "9", title: "Evaluasi Kinerja", items: [
-      { id: "9001-9.1", req: "Organisasi harus memantau, mengukur, menganalisis, dan mengevaluasi kinerja sistem manajemen mutu.", eng: "The organization shall monitor, measure, analyze and evaluate the effectiveness of the quality management system." },
-      { id: "9001-9.2", req: "Organisasi harus melakukan audit internal pada interval yang direncanakan.", eng: "The organization shall conduct internal audits at planned intervals to provide information on whether the quality management system conforms to requirements." },
-      { id: "9001-9.3", req: "Manajemen puncak harus meninjau sistem manajemen mutu pada interval yang direncanakan.", eng: "Top management shall review the organization's quality management system at planned intervals." }
+      { id: "9001-9.1", req: "Pemantauan, Pengukuran, Analisis, dan Evaluasi", eng: "Monitoring, Measurement, Analysis and Evaluation" },
+      { id: "9001-9.1.1", req: "Umum", eng: "General" },
+      { id: "9001-9.1.2", req: "Kepuasan Pelanggan", eng: "Customer Satisfaction" },
+      { id: "9001-9.1.3", req: "Analisis dan Evaluasi", eng: "Analysis and Evaluation" },
+      { id: "9001-9.2", req: "Audit Internal", eng: "Internal Audit" },
+      { id: "9001-9.3", req: "Tinjauan Manajemen", eng: "Management Review" }
     ]},
     { clause: "10", title: "Peningkatan", items: [
-      { id: "9001-10.1", req: "Organisasi harus menentukan peluang untuk peningkatan dan menerapkannya.", eng: "The organization shall determine and select opportunities for improvement and implement necessary actions." },
-      { id: "9001-10.2", req: "Organisasi harus bereaksi terhadap ketidaksesuaian dan mengambil tindakan korektif.", eng: "The organization shall react to nonconformities and take corrective action." },
-      { id: "9001-10.3", req: "Organisasi harus terus meningkatkan kesesuaian, kecukupan, dan efektivitas sistem manajemen mutu.", eng: "The organization shall continually improve the suitability, adequacy and effectiveness of the quality management system." }
+      { id: "9001-10.1", req: "Umum", eng: "General" },
+      { id: "9001-10.2", req: "Ketidaksesuaian dan Tindakan Perbaikan", eng: "Nonconformity and Corrective Action" },
+      { id: "9001-10.3", req: "Peningkatan Berkelanjutan", eng: "Continual Improvement" }
     ]}
   ];
 }
@@ -364,10 +395,7 @@ function loadClause(clauseNum, scrollToTop = false) {
   if (scrollToTop) {
     const mainContent = document.getElementById('main-content-area');
     if (mainContent) {
-      mainContent.scrollTo({
-        top: 0,
-        behavior: 'smooth'
-      });
+      mainContent.scrollTo({ top: 0, behavior: 'smooth' });
     }
   }
 }
