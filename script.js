@@ -1,6 +1,6 @@
 const standards = {
-  '9001': { name: 'ISO 9001:2015', short: '9001' },
-  '14001': { name: 'ISO 14001:2015', short: '14001' }
+  '9001': { name: '9001:2015', short: '9001' },
+  '14001': { name: '14001:2015', short: '14001' }
 };
 
 const credentials = {
@@ -361,7 +361,6 @@ function loadClause(clauseNum, scrollToTop = false) {
   renderSidebar();
   updateProgress();
 
-  // AUTO SCROLL KE PALING ATAS HANYA SAAT GANTI KLAUSUL DARI SIDEBAR / SEARCH
   if (scrollToTop) {
     const mainContent = document.getElementById('main-content-area');
     if (mainContent) {
@@ -378,7 +377,7 @@ function resetStatus(id) {
     delete answers[id].status;
     delete answers[id].timestamp;
     localStorage.setItem(`iso_audit_${currentUser}`, JSON.stringify(answers));
-    loadClause(currentClauseNum);   // tidak scroll
+    loadClause(currentClauseNum);
     showBannerNotification('Status telah dibatalkan', 'pending');
   }
 }
@@ -401,7 +400,7 @@ function handleFileUpload(id, input) {
       data: e.target.result
     };
     localStorage.setItem(`iso_audit_${currentUser}`, JSON.stringify(answers));
-    loadClause(currentClauseNum);   // tidak scroll
+    loadClause(currentClauseNum);
   };
   reader.readAsDataURL(file);
 }
@@ -409,7 +408,7 @@ function handleFileUpload(id, input) {
 function removeEvidenceFile(id) {
   if (answers[id]) delete answers[id].evidenceFile;
   localStorage.setItem(`iso_audit_${currentUser}`, JSON.stringify(answers));
-  loadClause(currentClauseNum);   // tidak scroll
+  loadClause(currentClauseNum);
 }
 
 function setStatus(id, status) {
@@ -422,7 +421,7 @@ function setStatus(id, status) {
   answers[id].status = status;
   answers[id].timestamp = new Date().toISOString();
   localStorage.setItem(`iso_audit_${currentUser}`, JSON.stringify(answers));
-  loadClause(currentClauseNum);   // tidak scroll
+  loadClause(currentClauseNum);
   
   const message = status === 'Compliant' ? 'Status Compliant berhasil disimpan' : 'Status Non-Compliant berhasil disimpan';
   showBannerNotification(message, status);
