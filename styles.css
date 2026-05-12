@@ -87,13 +87,12 @@ body {
   box-shadow: 0 10px 25px -5px rgb(0 0 0 / 0.5);
 }
 
-/* CLEAR BUTTON (X) */
+/* CLEAR BUTTON (X) - simplified, no rotate animation */
 .search-clear {
-  transition: transform 0.3s ease;
+  transition: color 0.3s ease;
 }
 
 .search-clear:hover {
-  transform: rotate(45deg) !important;
   color: #ef4444 !important;
 }
 
@@ -211,11 +210,16 @@ body {
 
 .bottom-bar-item:hover {
   transform: scale(1.08);
-  color: #3b82f6 !important;
 }
 
-.bottom-bar-item:last-child:hover {
-  color: #ef4444 !important;
+/* HEADER BUTTONS - CONSISTENT HOVER (transparan, hanya scale effect) */
+.header-buttons button {
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+.header-buttons button:hover {
+  transform: scale(1.08) !important;
+  background-color: transparent !important;
 }
 
 /* MOBILE IMPROVEMENT */
@@ -256,4 +260,48 @@ body {
 #main-content-area {
   scroll-behavior: smooth;
   overscroll-behavior: contain;
+}
+
+/* ==================== CUSTOM SCROLLBAR (SEMUA AREA) ==================== */
+.overflow-auto::-webkit-scrollbar,
+#search-suggestions::-webkit-scrollbar,
+#sidebar-content::-webkit-scrollbar,
+#mobile-sidebar-content::-webkit-scrollbar,
+#main-content-area::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+.overflow-auto::-webkit-scrollbar-track,
+#search-suggestions::-webkit-scrollbar-track,
+#sidebar-content::-webkit-scrollbar-track,
+#mobile-sidebar-content::-webkit-scrollbar-track,
+#main-content-area::-webkit-scrollbar-track {
+  background: var(--border-color);
+  border-radius: 9999px;
+}
+
+[data-theme="dark"] .overflow-auto::-webkit-scrollbar-track,
+[data-theme="dark"] #search-suggestions::-webkit-scrollbar-track,
+[data-theme="dark"] #sidebar-content::-webkit-scrollbar-track,
+[data-theme="dark"] #mobile-sidebar-content::-webkit-scrollbar-track,
+[data-theme="dark"] #main-content-area::-webkit-scrollbar-track {
+  background: #334155;
+}
+
+.overflow-auto::-webkit-scrollbar-thumb,
+#search-suggestions::-webkit-scrollbar-thumb,
+#sidebar-content::-webkit-scrollbar-thumb,
+#mobile-sidebar-content::-webkit-scrollbar-thumb,
+#main-content-area::-webkit-scrollbar-thumb {
+  background: #94a3b8;
+  border-radius: 9999px;
+}
+
+[data-theme="dark"] .overflow-auto::-webkit-scrollbar-thumb,
+[data-theme="dark"] #search-suggestions::-webkit-scrollbar-thumb,
+[data-theme="dark"] #sidebar-content::-webkit-scrollbar-thumb,
+[data-theme="dark"] #mobile-sidebar-content::-webkit-scrollbar-thumb,
+[data-theme="dark"] #main-content-area::-webkit-scrollbar-thumb {
+  background: #f8fafc;
 }
