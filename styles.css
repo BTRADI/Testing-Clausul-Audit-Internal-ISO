@@ -152,7 +152,7 @@ body {
   width: 100%;
 }
 
-/* BOTTOM BAR */
+/* BOTTOM BAR - teks utama hitam di light mode */
 #mobile-bottom-bar {
   background: #ffffff;
   border-top: 1px solid var(--border-color);
@@ -168,11 +168,11 @@ body {
 
 .bottom-bar-item {
   transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-  color: #0f172a;
+  color: #0f172a !important; /* hitam solid di light mode */
 }
 
 [data-theme="dark"] .bottom-bar-item {
-  color: #f1f5f9;
+  color: #f1f5f9 !important;
 }
 
 .bottom-bar-item:hover {
@@ -189,24 +189,43 @@ body {
   background-color: transparent !important;
 }
 
-/* ==================== QUESTION CARD - MOBILE OPTIMIZATION (<450px) ==================== */
+/* ==================== QUESTION CARD - MOBILE FIX (<450px) ==================== */
 @media (max-width: 450px) {
+  /* Header tidak ketiban lagi */
+  #main-content-area {
+    padding-top: 85px !important;
+    padding-bottom: 130px !important;
+  }
+
   .item-card {
     padding: 1rem !important;
     margin-bottom: 1rem !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    overflow-x: hidden;
   }
 
   .item-card > .flex {
     gap: 0.75rem !important;
   }
 
-  /* Nomor lingkaran biru — lebih kecil lagi */
+  /* Lingkaran nomor dengan gradient seperti "Clause 4" */
   .item-card > .flex > div:first-child {
     width: 36px !important;
     height: 36px !important;
     min-width: 36px !important;
-    font-size: 1.4rem !important;
+    background: linear-gradient(90deg, #1e40af, #7c3aed) !important;
+    color: #e2e8f0 !important; /* silver */
+    font-size: 1.35rem !important;
+    font-weight: 900;
     flex-shrink: 0;
+    box-shadow: 0 4px 10px -2px rgb(124 58 237 / 0.3);
+  }
+
+  /* Dark mode untuk lingkaran nomor */
+  [data-theme="dark"] .item-card > .flex > div:first-child {
+    background: linear-gradient(90deg, #60a5fa, #c084fc) !important;
+    color: #1e293b !important;
   }
 
   /* Teks Indonesia */
@@ -229,18 +248,25 @@ body {
     gap: 0.5rem !important;
     margin-bottom: 1rem !important;
     overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
   }
 
-  .item-card .flex.flex-wrap.gap-4 > span {
+  /* Badge 9001-4.1 - warna sama dengan lingkaran */
+  .item-card .flex.flex-wrap.gap-4 > span:first-child {
+    background: linear-gradient(90deg, #1e40af, #7c3aed) !important;
+    color: #e2e8f0 !important;
     font-size: 0.78rem !important;
     padding: 0.45rem 0.75rem !important;
     white-space: nowrap;
     flex-shrink: 0;
   }
 
-  /* Tombol Compliant & Non-Compliant — lebih compact */
+  [data-theme="dark"] .item-card .flex.flex-wrap.gap-4 > span:first-child {
+    background: linear-gradient(90deg, #60a5fa, #c084fc) !important;
+    color: #1e293b !important;
+  }
+
+  /* Tombol Compliant & Non-Compliant */
   .item-card .grid.grid-cols-1.md\\:grid-cols-2 {
     grid-template-columns: 1fr 1fr !important;
     gap: 0.65rem !important;
@@ -264,20 +290,12 @@ body {
   .item-card .upload-area {
     margin-top: 0.5rem !important;
   }
-
-  /* Pastikan tidak ada overflow horizontal */
-  .item-card {
-    overflow-x: hidden;
-    width: 100% !important;
-    max-width: 100% !important;
-  }
 }
 
 /* MOBILE IMPROVEMENT */
 @media (max-width: 450px) {
   #search-input { margin-left: 8px !important; margin-right: 8px !important; }
   .header-buttons { display: none !important; }
-  #main-content-area { padding-bottom: 110px !important; }
 }
 
 @media (max-width: 1023px) {
