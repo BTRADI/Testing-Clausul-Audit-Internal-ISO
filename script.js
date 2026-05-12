@@ -167,7 +167,7 @@ document.getElementById('login-form').addEventListener('submit', function(e) {
           document.getElementById('search-clear-btn').classList.add('hidden');
 
           renderSidebar();
-          loadClause('4');
+          loadClause('4', true);
           loadDarkModePreference();
           resetLoginButton();
         } else {
@@ -186,7 +186,7 @@ function renderSidebar() {
     const answered = clause.items.filter(item => answers[item.id]?.status).length;
     const percent = totalItems ? Math.round((answered / totalItems) * 100) : 0;
     html += `
-      <button onclick="loadClause('${clause.clause}'); if(window.innerWidth < 1024) toggleMobileMenu();" 
+      <button onclick="loadClause('${clause.clause}', true); if(window.innerWidth < 1024) toggleMobileMenu();" 
               class="clause-btn w-full text-left p-6 rounded-3xl glass hover:bg-blue-50 dark:hover:bg-blue-900/30 transition-all ${clause.clause === currentClauseNum ? 'bg-blue-600 text-white shadow-lg' : ''}">
         <div class="flex justify-between items-start">
           <div>
@@ -277,10 +277,10 @@ function clearSearch() {
 
 function selectSuggestion(clauseNum) {
   document.getElementById('search-suggestions').style.display = 'none';
-  loadClause(clauseNum);
+  loadClause(clauseNum, true);
 }
 
-function loadClause(clauseNum) {
+function loadClause(clauseNum, scrollToTop = false) {
   currentClauseNum = clauseNum;
   const clause = currentStandardData.find(c => c.clause === clauseNum);
   if (!clause) return;
@@ -361,13 +361,15 @@ function loadClause(clauseNum) {
   renderSidebar();
   updateProgress();
 
-  // AUTO SCROLL KE PALING ATAS SETIAP GANTI KLAUSUL
-  const mainContent = document.getElementById('main-content-area');
-  if (mainContent) {
-    mainContent.scrollTo({
-      top: 0,
-      behavior: 'smooth'
-    });
+  // AUTO SCROLL KE PALING ATAS HANYA SAAT GANTI KLAUSUL DARI SIDEBAR / SEARCH
+  if (scrollToTop) {
+    const mainContent = document.getElementById('main-content-area');
+    if (mainContent) {
+      mainContent.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    }
   }
 }
 
@@ -376,7 +378,7 @@ function resetStatus(id) {
     delete answers[id].status;
     delete answers[id].timestamp;
     localStorage.setItem(`iso_audit_${currentUser}`, JSON.stringify(answers));
-    loadClause(currentClauseNum);
+    loadClause(currentClauseNum);   // tidak scroll
     showBannerNotification('Status telah dibatalkan', 'pending');
   }
 }
@@ -399,7 +401,7 @@ function handleFileUpload(id, input) {
       data: e.target.result
     };
     localStorage.setItem(`iso_audit_${currentUser}`, JSON.stringify(answers));
-    loadClause(currentClauseNum);
+    loadClause(currentClauseNum);   // tidak scroll
   };
   reader.readAsDataURL(file);
 }
@@ -407,7 +409,7 @@ function handleFileUpload(id, input) {
 function removeEvidenceFile(id) {
   if (answers[id]) delete answers[id].evidenceFile;
   localStorage.setItem(`iso_audit_${currentUser}`, JSON.stringify(answers));
-  loadClause(currentClauseNum);
+  loadClause(currentClauseNum);   // tidak scroll
 }
 
 function setStatus(id, status) {
@@ -420,7 +422,7 @@ function setStatus(id, status) {
   answers[id].status = status;
   answers[id].timestamp = new Date().toISOString();
   localStorage.setItem(`iso_audit_${currentUser}`, JSON.stringify(answers));
-  loadClause(currentClauseNum);
+  loadClause(currentClauseNum);   // tidak scroll
   
   const message = status === 'Compliant' ? 'Status Compliant berhasil disimpan' : 'Status Non-Compliant berhasil disimpan';
   showBannerNotification(message, status);
