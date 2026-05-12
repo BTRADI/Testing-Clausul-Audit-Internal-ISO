@@ -87,7 +87,7 @@ body {
   box-shadow: 0 10px 25px -5px rgb(0 0 0 / 0.5);
 }
 
-/* CLEAR BUTTON (X) - simplified, no rotate animation */
+/* CLEAR BUTTON (X) */
 .search-clear {
   transition: color 0.3s ease;
 }
@@ -96,7 +96,7 @@ body {
   color: #ef4444 !important;
 }
 
-/* ==================== SIDEBAR CLAUSE BUTTON - FULL BIRU ==================== */
+/* ==================== SIDEBAR CLAUSE BUTTON ==================== */
 .clause-btn {
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
@@ -123,7 +123,6 @@ body {
   color: #ffffff !important;
 }
 
-/* Hover untuk clause yang tidak aktif */
 .clause-btn:not(.bg-blue-600):hover {
   background-color: #eff6ff !important;
   color: #1e40af !important;
@@ -134,7 +133,7 @@ body {
   color: #ffffff !important;
 }
 
-/* ==================== BANNER NOTIFICATION - FULL RED FIX ==================== */
+/* ==================== BANNER NOTIFICATION ==================== */
 #banner-notification {
   transition: all 1000ms cubic-bezier(0.4, 0, 0.2, 1) !important;
   z-index: 11000;
@@ -151,38 +150,6 @@ body {
   border-radius: 9999px;
   box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.15) !important;
   width: 100%;
-}
-
-/* Desktop */
-#banner-notification {
-  top: 1rem;
-}
-
-/* Mobile & Tablet - Tepat di bawah header */
-@media (max-width: 1023px) {
-  #banner-notification {
-    top: 5.5rem !important;
-    left: 4% !important;
-    right: 4% !important;
-    max-width: 92% !important;
-    width: 92% !important;
-  }
-}
-
-/* Layar kecil (<450px) */
-@media (max-width: 450px) {
-  #banner-notification {
-    top: 5.8rem !important;
-    max-width: 90% !important;
-    width: 90% !important;
-    left: 5% !important;
-    right: 5% !important;
-  }
-  
-  #banner-notification .banner-content {
-    padding: 14px 20px;
-    font-size: 0.95rem;
-  }
 }
 
 /* BOTTOM BAR */
@@ -212,7 +179,7 @@ body {
   transform: scale(1.08);
 }
 
-/* HEADER BUTTONS - CONSISTENT HOVER (transparan, hanya scale effect) */
+/* HEADER BUTTONS */
 .header-buttons button {
   transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1) !important;
 }
@@ -220,6 +187,74 @@ body {
 .header-buttons button:hover {
   transform: scale(1.08) !important;
   background-color: transparent !important;
+}
+
+/* ==================== QUESTION CARD - MOBILE OPTIMIZATION (<450px) ==================== */
+@media (max-width: 450px) {
+  .item-card {
+    padding: 1.25rem !important;
+  }
+
+  .item-card > .flex {
+    gap: 0.75rem !important;
+  }
+
+  /* Nomor lingkaran biru — dibuat jauh lebih kecil */
+  .item-card > .flex > div:first-child {
+    width: 40px !important;
+    height: 40px !important;
+    min-width: 40px !important;
+    font-size: 1.5rem !important;
+    flex-shrink: 0;
+  }
+
+  /* Teks requirement */
+  .item-card h3 {
+    font-size: 1.15rem !important;
+    line-height: 1.35 !important;
+    margin-bottom: 0.5rem !important;
+  }
+
+  .item-card p {
+    font-size: 0.875rem !important;
+    line-height: 1.4 !important;
+    margin-bottom: 1rem !important;
+  }
+
+  /* Baris Clause ID + Status Badge (samping-sampingan) */
+  .item-card .flex.flex-wrap.gap-4 {
+    flex-wrap: nowrap !important;
+    gap: 0.5rem !important;
+    margin-bottom: 1rem !important;
+  }
+
+  .item-card .flex.flex-wrap.gap-4 > span {
+    font-size: 0.8rem !important;
+    padding: 0.5rem 0.75rem !important;
+    white-space: nowrap;
+  }
+
+  /* Tombol Compliant & Non-Compliant — dipaksa samping-sampingan */
+  .item-card .grid.grid-cols-1.md\\:grid-cols-2 {
+    grid-template-columns: 1fr 1fr !important;
+    gap: 0.75rem !important;
+  }
+
+  .item-card button.status-btn {
+    padding: 1rem 0.75rem !important;
+    font-size: 0.95rem !important;
+  }
+
+  /* Textarea catatan auditor — full width di bawah tombol */
+  .item-card textarea {
+    margin-top: 1rem !important;
+    margin-bottom: 1rem !important;
+  }
+
+  /* Upload area tetap full width */
+  .item-card .upload-area {
+    margin-top: 0.5rem !important;
+  }
 }
 
 /* MOBILE IMPROVEMENT */
@@ -231,36 +266,6 @@ body {
 
 @media (max-width: 1023px) {
   #mobile-bottom-bar { display: flex !important; }
-}
-
-/* ==================== QUESTION CARD OPTIMIZATION (LAYAR <450px) ==================== */
-/* Membuat nomor klausul lebih kecil agar tidak terlalu dominan dan teks lebih nyaman dibaca */
-@media (max-width: 450px) {
-  .item-card {
-    padding: 1.5rem !important;
-  }
-  
-  .item-card > .flex {
-    gap: 1rem !important;
-  }
-  
-  /* Container nomor (lingkaran biru) */
-  .item-card > .flex > div:first-child {
-    width: 48px !important;
-    height: 48px !important;
-    min-width: 48px !important;
-  }
-  
-  /* Ukuran angka di dalam lingkaran */
-  .item-card > .flex > div:first-child {
-    font-size: 1.75rem !important; /* lebih kecil dari text-4xl */
-  }
-  
-  /* Sedikit penyesuaian teks pertanyaan agar lebih lega */
-  .item-card h3 {
-    font-size: 1.25rem !important;
-    line-height: 1.4 !important;
-  }
 }
 
 /* LAINNYA */
@@ -292,7 +297,7 @@ body {
   overscroll-behavior: contain;
 }
 
-/* ==================== CUSTOM SCROLLBAR (SEMUA AREA) ==================== */
+/* ==================== CUSTOM SCROLLBAR ==================== */
 .overflow-auto::-webkit-scrollbar,
 #search-suggestions::-webkit-scrollbar,
 #sidebar-content::-webkit-scrollbar,
