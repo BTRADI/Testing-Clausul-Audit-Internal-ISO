@@ -47,6 +47,25 @@ body {
 [data-theme="dark"] .text-gray-500   { color: #cbd5e1 !important; }
 [data-theme="dark"] .font-bold       { color: #f1f5f9 !important; }
 
+/* LOGIN INPUTS - DARK MODE FIX (teks sekarang jelas terlihat) */
+#login-form input[type="text"],
+#login-form input[type="password"] {
+  background-color: #ffffff !important;
+  color: #0f172a !important;
+  border-color: #e2e8f0 !important;
+}
+
+[data-theme="dark"] #login-form input[type="text"],
+[data-theme="dark"] #login-form input[type="password"] {
+  background-color: #1e2937 !important;
+  color: #f8fafc !important;
+  border-color: #475569 !important;
+}
+
+[data-theme="dark"] #login-form input::placeholder {
+  color: #94a3b8 !important;
+}
+
 /* SEARCH CONTAINER & SUGGESTIONS */
 #search-container { position: relative; }
 
@@ -85,6 +104,20 @@ body {
   background: #1e293b !important;
   border-color: #475569 !important;
   box-shadow: 0 10px 25px -5px rgb(0 0 0 / 0.5);
+}
+
+/* SEARCH SUGGESTIONS DARK MODE FIX */
+[data-theme="dark"] #search-suggestions .px-4.py-2.text-xs.font-medium.text-blue-600 {
+  color: #f8fafc !important;
+}
+
+[data-theme="dark"] #search-suggestions span.font-mono.text-sm {
+  color: #f8fafc !important;
+  background: #1e40af !important;
+}
+
+[data-theme="dark"] #search-suggestions .text-sm.line-clamp-2 {
+  color: #e2e8f0 !important;
 }
 
 /* CLEAR BUTTON (X) */
@@ -152,7 +185,7 @@ body {
   width: 100%;
 }
 
-/* BOTTOM BAR - teks utama hitam di light mode */
+/* BOTTOM BAR */
 #mobile-bottom-bar {
   background: #ffffff;
   border-top: 1px solid var(--border-color);
@@ -168,7 +201,7 @@ body {
 
 .bottom-bar-item {
   transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-  color: #0f172a !important; /* hitam solid di light mode */
+  color: #0f172a !important;
 }
 
 [data-theme="dark"] .bottom-bar-item {
@@ -191,7 +224,6 @@ body {
 
 /* ==================== QUESTION CARD - MOBILE FIX (<450px) ==================== */
 @media (max-width: 450px) {
-  /* Header tidak ketiban lagi */
   #main-content-area {
     padding-top: 85px !important;
     padding-bottom: 130px !important;
@@ -209,40 +241,35 @@ body {
     gap: 0.75rem !important;
   }
 
-  /* Lingkaran nomor dengan gradient seperti "Clause 4" */
   .item-card > .flex > div:first-child {
     width: 36px !important;
     height: 36px !important;
     min-width: 36px !important;
     background: linear-gradient(90deg, #1e40af, #7c3aed) !important;
-    color: #e2e8f0 !important; /* silver */
+    color: #e2e8f0 !important;
     font-size: 1.35rem !important;
     font-weight: 900;
     flex-shrink: 0;
     box-shadow: 0 4px 10px -2px rgb(124 58 237 / 0.3);
   }
 
-  /* Dark mode untuk lingkaran nomor */
   [data-theme="dark"] .item-card > .flex > div:first-child {
     background: linear-gradient(90deg, #60a5fa, #c084fc) !important;
     color: #1e293b !important;
   }
 
-  /* Teks Indonesia */
   .item-card h3 {
     font-size: 1.1rem !important;
     line-height: 1.35 !important;
     margin-bottom: 0.5rem !important;
   }
 
-  /* Teks Inggris */
   .item-card p {
     font-size: 0.85rem !important;
     line-height: 1.4 !important;
     margin-bottom: 1rem !important;
   }
 
-  /* Baris Clause ID + Status Badge */
   .item-card .flex.flex-wrap.gap-4 {
     flex-wrap: nowrap !important;
     gap: 0.5rem !important;
@@ -251,7 +278,6 @@ body {
     scrollbar-width: none;
   }
 
-  /* Badge 9001-4.1 - warna sama dengan lingkaran */
   .item-card .flex.flex-wrap.gap-4 > span:first-child {
     background: linear-gradient(90deg, #1e40af, #7c3aed) !important;
     color: #e2e8f0 !important;
@@ -266,7 +292,6 @@ body {
     color: #1e293b !important;
   }
 
-  /* Tombol Compliant & Non-Compliant */
   .item-card .grid.grid-cols-1.md\\:grid-cols-2 {
     grid-template-columns: 1fr 1fr !important;
     gap: 0.65rem !important;
@@ -279,14 +304,12 @@ body {
     white-space: nowrap;
   }
 
-  /* Textarea catatan auditor */
   .item-card textarea {
     margin-top: 1rem !important;
     margin-bottom: 1rem !important;
     font-size: 0.95rem !important;
   }
 
-  /* Upload area */
   .item-card .upload-area {
     margin-top: 0.5rem !important;
   }
