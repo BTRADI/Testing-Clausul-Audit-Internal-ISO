@@ -97,7 +97,7 @@ body {
   color: #ef4444 !important;
 }
 
-/* ==================== SIDEBAR CLAUSE BUTTON - FULL BIRU (FIXED) ==================== */
+/* ==================== SIDEBAR CLAUSE BUTTON - FULL BIRU ==================== */
 .clause-btn {
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
@@ -110,7 +110,6 @@ body {
   box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1);
 }
 
-/* STATE AKTIF - FULL BIRU (tidak ada garis putih lagi) */
 .clause-btn.bg-blue-600 {
   background: linear-gradient(90deg, #1e40af, #2563eb) !important;
   color: #ffffff !important;
@@ -118,7 +117,6 @@ body {
   border: none !important;
 }
 
-/* Teks dan icon tetap putih & jelas */
 .clause-btn.bg-blue-600 .font-mono,
 .clause-btn.bg-blue-600 p,
 .clause-btn.bg-blue-600 .text-3xl,
@@ -135,6 +133,57 @@ body {
 [data-theme="dark"] .clause-btn:not(.bg-blue-600):hover {
   background-color: #1e40af !important;
   color: #ffffff !important;
+}
+
+/* ==================== BANNER NOTIFICATION - FULL RED FIX ==================== */
+#banner-notification {
+  transition: all 1000ms cubic-bezier(0.4, 0, 0.2, 1) !important;
+  z-index: 11000;
+  box-shadow: none !important;
+}
+
+#banner-notification .banner-content {
+  padding: 16px 24px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: white;
+  font-weight: 600;
+  border-radius: 9999px;
+  box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.15) !important;
+  width: 100%;
+}
+
+/* Desktop */
+#banner-notification {
+  top: 1rem;
+}
+
+/* Mobile & Tablet - Tepat di bawah header */
+@media (max-width: 1023px) {
+  #banner-notification {
+    top: 5.5rem !important;
+    left: 4% !important;
+    right: 4% !important;
+    max-width: 92% !important;
+    width: 92% !important;
+  }
+}
+
+/* Layar kecil (<450px) */
+@media (max-width: 450px) {
+  #banner-notification {
+    top: 5.8rem !important;
+    max-width: 90% !important;
+    width: 90% !important;
+    left: 5% !important;
+    right: 5% !important;
+  }
+  
+  #banner-notification .banner-content {
+    padding: 14px 20px;
+    font-size: 0.95rem;
+  }
 }
 
 /* BOTTOM BAR */
@@ -180,21 +229,6 @@ body {
   #mobile-bottom-bar { display: flex !important; }
 }
 
-/* BANNER NOTIFICATION */
-#banner-notification {
-  box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.2);
-}
-
-.banner-content {
-  padding: 16px 20px;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  color: white;
-  font-weight: 500;
-  border-radius: 9999px;
-}
-
 /* LAINNYA */
 .upload-area {
   border: 2px dashed var(--border-color);
@@ -218,3 +252,8 @@ body {
 }
 
 .item-card { transition: all 0.3s ease; }
+
+#main-content-area {
+  scroll-behavior: smooth;
+  overscroll-behavior: contain;
+}
