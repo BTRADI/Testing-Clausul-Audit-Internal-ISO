@@ -233,6 +233,36 @@ body {
   #mobile-bottom-bar { display: flex !important; }
 }
 
+/* ==================== QUESTION CARD OPTIMIZATION (LAYAR <450px) ==================== */
+/* Membuat nomor klausul lebih kecil agar tidak terlalu dominan dan teks lebih nyaman dibaca */
+@media (max-width: 450px) {
+  .item-card {
+    padding: 1.5rem !important;
+  }
+  
+  .item-card > .flex {
+    gap: 1rem !important;
+  }
+  
+  /* Container nomor (lingkaran biru) */
+  .item-card > .flex > div:first-child {
+    width: 48px !important;
+    height: 48px !important;
+    min-width: 48px !important;
+  }
+  
+  /* Ukuran angka di dalam lingkaran */
+  .item-card > .flex > div:first-child {
+    font-size: 1.75rem !important; /* lebih kecil dari text-4xl */
+  }
+  
+  /* Sedikit penyesuaian teks pertanyaan agar lebih lega */
+  .item-card h3 {
+    font-size: 1.25rem !important;
+    line-height: 1.4 !important;
+  }
+}
+
 /* LAINNYA */
 .upload-area {
   border: 2px dashed var(--border-color);
